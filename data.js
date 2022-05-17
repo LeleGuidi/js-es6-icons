@@ -113,17 +113,26 @@ const icons = 	[
 	}
 ];
 
-//Create variabili per container e templateHTML
+//Create variabili per container e template e box.
 const container = document.querySelector(".container");
-const tplBox = document.querySelector(".template-box").content;
+const template = document.querySelector(".template-box").content;
 
 //Per ogni oggetto dell'arrray vado a ciclare in modo da ottenere il nome e prefisso di ognuno e inserirlo nel DOM
 for (let i = 0; i < icons.length; i++){
-	const box = tplBox.cloneNode(true);
-	const {prefix, name} = icons[i];
+	const tpl = template.cloneNode(true);
+	const {prefix, name, color} = icons[i];
 
-	box.querySelector(".icon").className += ` ${prefix}${name}`;
-    box.querySelector(".icon-name").innerHTML = name;
+	tpl.querySelector(".icon").className += ` ${prefix}${name}`;
+    tpl.querySelector(".icon-name").innerHTML = name;
 
-	container.append(box);
+	//A seconda del colore che ha l'oggetto, si va ad aggiungere al DIV.BOX la classe del colore corrispondente
+	if (color == "orange") {
+		tpl.querySelector(".box").className += " clr-orange";
+	} else if (color == "blue") {
+		tpl.querySelector(".box").className += " clr-blue";
+	} else {
+		tpl.querySelector(".box").className += " clr-purple";
+	}
+
+	container.append(tpl);
 }

@@ -55,3 +55,15 @@ h1 {
 .icon-name {
     font-size: 12px;
 }
+/*--------------------
+    COLORS
+--------------------*/
+.clr-orange {
+    color: orange;
+}
+.clr-blue {
+    color: blue;
+}
+.clr-purple {
+    color: purple;
+}
