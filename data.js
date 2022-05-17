@@ -1,4 +1,4 @@
-[
+const icons = 	[
 	{
 		name: 'cat',
 		prefix: 'fa-',
@@ -112,3 +112,18 @@
 		color: 'blue'
 	}
 ];
+
+//Create variabili per container e templateHTML
+const container = document.querySelector(".container");
+const tplBox = document.querySelector(".template-box").content;
+
+//Per ogni oggetto dell'arrray vado a ciclare in modo da ottenere il nome e prefisso di ognuno e inserirlo nel DOM
+for (let i = 0; i < icons.length; i++){
+	const box = tplBox.cloneNode(true);
+	const {prefix, name} = icons[i];
+
+	box.querySelector(".icon").className += ` ${prefix}${name}`;
+    box.querySelector(".icon-name").innerHTML = name;
+
+	container.append(box);
+}
