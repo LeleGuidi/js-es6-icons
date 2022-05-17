@@ -120,9 +120,13 @@ const userChoice = document.getElementById("tipo");
 //Per ogni oggetto dell'arrray vado a ciclare in modo da ottenere il nome e prefisso di ognuno e inserirlo nel DOM
 printBox(icons)
 
-//A seconda del valore scelto tramite tag select verranno creati e stampati nel DOM gli array contenenti le icone desiderate
+//A seconda del valore scelto, tramite tag select, verranno creati e stampate le icone contenenti il valore desiderato
 userChoice.addEventListener(`change`, 
 function() {
+	//I box vengono rimossi
+	const box = document.querySelectorAll(".box")
+	box.forEach((e) => e.remove())
+
 	switch (userChoice.value) {
 		case "all":
 			printBox(icons)
@@ -147,8 +151,6 @@ function() {
 ---------------*/
 //Funzione per creare un array in base al tipo inserito come argomento
 function choice(typeOfChoice) {
-	const box = document.querySelectorAll(".box")
-	box.forEach((e) => e.remove())
 	return icons.filter((e) => (e.type === typeOfChoice))
 }
 
