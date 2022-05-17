@@ -113,26 +113,63 @@ const icons = 	[
 	}
 ];
 
-//Create variabili per container e template e box.
+//Create variabili per container e template e della select
 const container = document.querySelector(".container");
 const template = document.querySelector(".template-box").content;
-
+const userChoice = document.getElementById("tipo");
 //Per ogni oggetto dell'arrray vado a ciclare in modo da ottenere il nome e prefisso di ognuno e inserirlo nel DOM
-for (let i = 0; i < icons.length; i++){
-	const tpl = template.cloneNode(true);
-	const {prefix, name, color} = icons[i];
+printBox(icons)
 
-	tpl.querySelector(".icon").className += ` ${prefix}${name}`;
-    tpl.querySelector(".icon-name").innerHTML = name;
-
-	//A seconda del colore che ha l'oggetto, si va ad aggiungere al DIV.BOX la classe del colore corrispondente
-	if (color == "orange") {
-		tpl.querySelector(".box").className += " clr-orange";
-	} else if (color == "blue") {
-		tpl.querySelector(".box").className += " clr-blue";
-	} else {
-		tpl.querySelector(".box").className += " clr-purple";
+//A seconda del valore scelto tramite tag select verranno creati e stampati nel DOM gli array contenenti le icone desiderate
+userChoice.addEventListener(`change`, 
+function() {
+	switch (userChoice.value) {
+		case "all":
+			printBox(icons)
+			break;
+		case "animal":
+			const animalIcons = choice("animal")
+			printBox(animalIcons)
+			break;
+		case "user":
+			const userIcons = choice("user")
+			printBox(userIcons)
+			break;
+		case "vegetable":
+			const vegetableIcons = choice("vegetable")
+			printBox(vegetableIcons)
+			break;
 	}
+})
 
-	container.append(tpl);
+/*---------------
+	FUNZIONI
+---------------*/
+//Funzione per creare un array in base al tipo inserito come argomento
+function choice(typeOfChoice) {
+	const box = document.querySelectorAll(".box")
+	box.forEach((e) => e.remove())
+	return icons.filter((e) => (e.type === typeOfChoice))
+}
+
+// Funzione per stampare le box con il contenuto presente nell'array passato come argomento
+function printBox(array) {
+	for (let i = 0; i < array.length; i++){
+		const tpl = template.cloneNode(true);
+		const {prefix, name, color} = array[i];
+	
+		tpl.querySelector(".icon").className += ` ${prefix}${name}`;
+		tpl.querySelector(".icon-name").innerHTML = name;
+	
+		//A seconda del colore che ha l'oggetto, si va ad aggiungere al DIV.BOX la classe del colore corrispondente
+		if (color == "orange") {
+			tpl.querySelector(".box").className += " clr-orange";
+		} else if (color == "blue") {
+			tpl.querySelector(".box").className += " clr-blue";
+		} else {
+			tpl.querySelector(".box").className += " clr-purple";
+		}
+	
+		container.append(tpl);
+	}
 }
