@@ -165,11 +165,11 @@ function printBox(array) {
 	
 		//A seconda del colore che ha l'oggetto, si va ad aggiungere al DIV.BOX la classe del colore corrispondente
 		if (color == "orange") {
-			tpl.querySelector(".box").className += " clr-orange";
+			tpl.querySelector(".box").style.color = color;
 		} else if (color == "blue") {
-			tpl.querySelector(".box").className += " clr-blue";
+			tpl.querySelector(".box").style.color = color;
 		} else {
-			tpl.querySelector(".box").className += " clr-purple";
+			tpl.querySelector(".box").style.color = color;
 		}
 	
 		container.append(tpl);
