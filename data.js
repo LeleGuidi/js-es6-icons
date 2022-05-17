@@ -116,18 +116,33 @@ const icons = 	[
 //Create variabili per container e template e della select
 const container = document.querySelector(".container");
 const template = document.querySelector(".template-box").content;
-const userChoice = document.getElementById("tipo");
+const typeSelected = document.getElementById('tipo');
 //Per ogni oggetto dell'arrray vado a ciclare in modo da ottenere il nome e prefisso di ognuno e inserirlo nel DOM
 printBox(icons)
 
+//Tramite un ciclo inserisco in un nuovo array tutte le tipologie delle icone, senza mettere doppioni.
+const iconsType = []
+icons.forEach((e) => {
+	let type = e.type
+	if (!iconsType.includes(type)) {
+		iconsType.push(type)
+	}
+})
+
+//Per ogni elemento dell'array, contenente le tipologie delle icone, vado a creare una nuova opzione all'interno del tag select
+iconsType.forEach((e) => {
+	typeSelected.options[typeSelected.options.length] = new Option(e, e);
+})
+
+
 //A seconda del valore scelto, tramite tag select, verranno creati e stampate le icone contenenti il valore desiderato
-userChoice.addEventListener(`change`, 
+typeSelected.addEventListener(`change`, 
 function() {
 	//I box vengono rimossi
 	const box = document.querySelectorAll(".box")
 	box.forEach((e) => e.remove())
 
-	switch (userChoice.value) {
+	switch (typeSelected.value) {
 		case "all":
 			printBox(icons)
 			break;
@@ -182,4 +197,7 @@ function randomColor() {
 	let color = "#" + rundom
 	return color
 }
- console.log(randomColor())
+
+
+
+ 
